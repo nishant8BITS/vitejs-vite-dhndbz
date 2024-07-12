@@ -1,20 +1,34 @@
 import React from "react";
 
 interface BaseButtonProps {
-    type: "primary" | "secondar" | "ghost" | "outlined";
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
     label: string;
+    style?: Record<string, string>
 }
 
-const BUTTON_POSSIBLE_TYPES = ["primary", "secondar", "ghost", "outlined"] as const;
-export const BaseButton: React.FC<BaseButtonProps> = ({type, onClick, label}) =>{
-    if(!BUTTON_POSSIBLE_TYPES.includes(type)){
-        return <div>Button type not supported</div>
-    }
-
+export const BaseButton: React.FC<BaseButtonProps> = ({onClick, label, style}) =>{
     return (
-        <button onClick={onClick}>
+        <button onClick={onClick} style={style}>
             {label}
         </button>
     )
 }
+
+
+export const PrimaryButton: React.FC<BaseButtonProps> = ({label, onClick}) =>{
+    return (
+        <BaseButton label={label} onClick={onClick} style={{
+            backgroundColor: 'black'
+        }} />
+    )
+}
+
+export const SecondaryButton: React.FC<BaseButtonProps> = ({ label, onClick}) => {
+    return (
+        <BaseButton label={label} onClick={onClick} style={{
+            backgroundColore: 'gray'
+        }} />
+    )
+}
+
+
